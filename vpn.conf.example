@@ -1,0 +1,4 @@
+HOST=vpn.example.com
+PORT=22
+USER=user1
+PASSWORD=yourpassword
