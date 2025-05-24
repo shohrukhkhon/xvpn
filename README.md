@@ -2,13 +2,14 @@
 
 Tags: #ssh #vpn #socks5 #redsocks #iptables #tunnel
 
-A simple Bash script to create a secure VPN-like proxy using SSH tunnel and redsocks. Route all your system traffic through a remote server easily and securely.
+A secure VPN-like proxy solution using SSH tunnel and redsocks. Route all system traffic through a remote server with automatic configuration.
 
 ## Features
 - Full system traffic redirection via SSH tunnel
-- Use redsocks and iptables for transparent proxying
-- Easy configuration and quick start
-- No root access required on the remote server
+- Automatic dependency installation
+- Transparent proxying with redsocks + iptables
+- One-time setup with persistent alias
+- Automatic cleanup on termination
 
 ## Installation
 ```bash
@@ -17,53 +18,75 @@ cd xvpn
 sudo chmod +x vpn.sh
 ```
 
-## Install required components
-For Debian/Ubuntu:
+## Quick Start
+#### Initial Setup
+
 ```bash
-sudo apt-get update
-sudo apt-get install -y ssh redsocks iptables
+sudo ./vpn.sh setup
+```
+This will:
+
+1) Install required dependencies
+2) Create config from example file
+3) Add xvpn alias to your shell
+4) Update current shell session
+
+#### Configuration
+
+Edit the generated config file:
+
+```bash
+nano vpn.conf
 ```
 
-## Configuration
-1. Copy the example config and edit it:
-   ```bash
-   cp vpn.conf.example vpn.conf
-   nano vpn.conf
-   ```
+Set your SSH server details:
+
+```ini
+HOST="your.server.com"
+PORT="22"
+USER="username"
+PASSWORD="yourpassword"
+```
 
 ## Usage
-Start VPN tunnel:
-```bash
-sudo ./vpn.sh
-```
-To stop the VPN tunnel, simply press <kbd>Ctrl</kbd>+<kbd>C</kbd> in the terminal where the script is running.
 
-### Alias for convenience
-Add this line to your `~/.bashrc` or `~/.zshrc`:
+Start VPN connection:
+
 ```bash
-alias xvpn='cd /path/to/xvpn && sudo ./vpn.sh'
-```
-Then reload your shell config:
-```bash
-source ~/.bashrc  # or source ~/.zshrc
-```
-Now you can start the VPN tunnel with:
-```bash
-xvpn
+xvpn start
 ```
 
-## Free SSH Server Access
-You can get free SSH server access for use with XVPN at:
-[https://www.vpnjantit.com/free-ssh](https://www.vpnjantit.com/free-ssh)
+Stop VPN connection:
 
-## Requirements
-- bash | ssh | redsocks | iptables
+```bash
+xvpn stop
+```
+
+## System Commands
+
+| Command      | Description                         |
+| :----------- | :---------------------------------- |
+| `xvpn start` | Establish VPN connection            |
+| `xvpn stop`  | Terminate VPN connection            |
+| `xvpn setup` | First-time configuration (run once) |
+
+## Recommended SSH Providers
+
+For free SSH server access: \
+https://www.vpnjantit.com/free-ssh
 
 ## License
+
 MIT
 
 ## Contributing
-Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
-## Star
-If you find this project useful, please give it a star on GitHub!
+Contributions welcome! Please:
+
+1) Open an issue to discuss changes
+2) Fork the repository
+3) Submit a pull request
+
+## Support
+
+Show your support by giving a ⭐ on GitHub!
